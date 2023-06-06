@@ -1,0 +1,13 @@
+
+.payment_div_head{
+    font-weight: bolder;
+    font-size:50px
+}
+
+
+@media (max-width:1400px){}
+@media (max-width:1200px){}
+@media (max-width:992px){}
+@media (max-width:767px){}
+@media (max-width:556px){}
+@media (max-width:400px){}

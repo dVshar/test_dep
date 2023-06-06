@@ -1,0 +1,1 @@
+web: gunicorn Mahabir.wsgi --log-file -

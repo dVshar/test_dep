@@ -1,0 +1,330 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Booking</title>
+	<link rel="icon" type="image/x-icon" href="{% static 'images/test/fav.png' %}">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="description" content="The River template project">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-4.1.2/bootstrap.min.css' %}">
+	<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.3.4/owl.carousel.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.3.4/owl.theme.default.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.3.4/animate.css' %}">
+	<link href="{% static 'plugins/jquery-datepicker/jquery-ui.css' %}" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/booking.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/booking_responsive.css' %}">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/dropdown.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/book_d_form.css' %}">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		.Input_field {
+			width: 90%;
+			height: 80%;
+			background-color: rgba(216, 206, 206, 0.5);
+			border-color: rgba(216, 206, 206, 0.5);
+		}
+
+		.Input_field::selection {
+			outline: none;
+		}
+
+		.Input_price {
+			width: 90%;
+			height: 180%;
+			background-color: aliceblue;
+			border: 1px solid aliceblue;
+		}
+
+		.book_button_booking {
+			margin-left: 55%;
+			border: 1px solid #003366;
+			background-color: #003366;
+			width: 100%;
+			height: 170%;
+			color: aliceblue
+		}
+
+		@media(max-width:767px) {
+			.Input_price {
+				width: 60%;
+				height: 140%;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="super_container">
+
+		<!-- Header -->
+
+		{% include 'Ttrail/nav.html' %}
+		<!-- Home -->
+
+		<div class="home">
+			<div class="owl-carousel owl-theme home_slider">
+				<!-- Slide -->
+				{% for i in Banner.Images %}
+				<div class="slide">
+					<div class="background_image" style="background-image:url({{i.Image}});"></div>
+					<div class="home_container">
+						<div class="container">
+							<div class="row">
+								<div class="col">
+									<div class="home_content text-center">
+										<div class="home_title">{{i.Heading}}</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+
+			</div>
+		</div>
+
+		<!-- Booking -->
+		<div class="home">
+			<div class="background_image"></div>
+			<div>
+				<div class="container">
+					<form method="post" onsubmit="return submitForm()">
+						{% csrf_token %}
+						<div class="row">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="row my-2">
+									<div style="margin-left:5%;" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+										<label><strong>ROOM TYPE:-</strong></label>
+										<div class="row">
+											<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
+												<input onchange="priceAlter()" type="radio" id="room" name="room"
+													value="delux_4500" checked>
+												<label for="room">DELUX</label>
+											</div>
+											<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
+												<input onchange="priceAlter()" type="radio" id="room1" name="room"
+													value="superdelux_5500">
+												<label for="room1">SUPER DELUX</label>
+											</div>
+											<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
+												<input onchange="priceAlter()" type="radio" id="room2" name="room"
+													value="premium_6000">
+												<label for="room2">PREMIUM</label>
+											</div>
+											<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
+												<input onchange="priceAlter()" type="radio" id="room3" name="room"
+													value="suite_12000">
+												<label for="room3">SUITE</label>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- <div class="row my-2">
+								<div style="margin-left:5%;" class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+									<label><strong>PACKAGES :-</strong></label>
+									<div class="row">
+										<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
+											<input  type="radio" id="" name="" value="" checked>
+											<label for="room">DELUX</label>
+										</div>
+										<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
+											<input  type="radio" id="" name="" value="">
+											<label for="room1">SUPER DELUX</label>
+										</div>
+										<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
+											<input  type="radio" id="" name="" value="">
+											<label for="room2">PREMIUM</label>
+										</div>
+										<div class="col-xl-3 col-lg-3 col-md-6 col-sm-6 col-6">
+											<input  type="radio" id="" name="" value="">
+											<label for="room3">SUITE</label>
+										</div>
+									</div>
+								</div>
+							</div> -->
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="row my-2">
+									<div style="margin-left:5%;" class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+										<label><strong>CHECKIN</strong></label>
+										<input value="{{ checkin }}" id="checkin_date" name="form_book_checkin"
+											onchange="Alterdate()" placeholder="CHECKIN"
+											class="Input_field datepicker booking_input booking_input_a booking_out"
+											type="text">
+									</div>
+									<div style="margin-left:5%;" class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+										<label><strong>CHECK-OUT</strong></label>
+										<input value="{{ checkout }}" id="checkout_date" name="form_book_checkout"
+											placeholder="CHECKOUT"
+											class="Input_field datepicker booking_input booking_input_a booking_out"
+											type="text">
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="row my-3">
+									<div style="margin-left:5%;" class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+										<label><strong>ADULTS</strong></label>
+										<select onchange="CalculatePrice()" value="{{ adult }}" class="Input_field"
+											name="adult" id="adult">
+											<option value="0" selected>0</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+										</select>
+									</div>
+									<div style="margin-left:5%;" class="col-xl-5 col-lg-5 col-md-5 col-sm-5 col-5">
+										<label><strong>CHILDRENS</strong></label>
+										<select onchange="CalculatePrice()" value="{{ child }}" class="Input_field"
+											name="kid" id="kid">
+											<option value="0" selected>0</option>
+											<option value="1">1</option>
+											<option value="2">2</option>
+											<option value="3">3</option>
+											<option value="4">4</option>
+											<option value="5">5</option>
+											<option value="6">6</option>
+											<option value="7">7</option>
+											<option value="8">8</option>
+											<option value="9">9</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="row my-3">
+									<div style="margin-left:22%;" class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6">
+										<p style="text-align: center;"><strong
+												style="float: left;margin-left: 22%;">PRICE</strong>₹<strong
+												style="font-size: xx-large;" id="price_static">0</strong></p>
+										<input class="Input_price d-none" id="amount_payable" type="text" readonly>
+									</div>
+								</div>
+							</div>
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="row my-3">
+									<div style="margin-left:15%;" class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+										<button class="book_button_booking" type="submit"><strong>Book
+												Now</strong></button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Details Right -->
+
+		<!-- Footer -->
+
+		<footer class="footer">
+			<div class="footer_content">
+				<div class="container">
+					<div class="row">
+						<div class="col">
+							<div class="footer_logo_container text-center">
+								<div class="footer_logo">
+									<a href="#"></a>
+									<div>Mahabir Palace</div>
+									<div>since 1945</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row footer_row">
+
+						<!-- Address -->
+						<div class="col-lg-3">
+							<div class="footer_title">Our Address</div>
+							<div class="footer_list">
+								<ul>
+									<li>Soalteemode, Kathmandu</li>
+									<li>Nepal</li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- Reservations -->
+						<div class="col-lg-3">
+							<div class="footer_title">Reservations</div>
+							<div class="footer_list">
+								<ul>
+									<li><a href="Tel: {{Menu.Number}}">Tel: {{Menu.Number}}</a></li>
+									<li><a href="Mailto:{{Footer.Email}}">{{Footer.Email}}</a></li>
+								</ul>
+							</div>
+						</div>
+
+						<!-- Newsletter -->
+						<div class="col-lg-3">
+							<div class="footer_title">Newsletter</div>
+							<div class="newsletter_container">
+								<form action="#" class="newsletter_form" id="newsletter_form">
+									<input type="email" class="newsletter_input" placeholder="Your email address"
+										required="required">
+									<button class="newsletter_button">Subscribe</button>
+								</form>
+							</div>
+						</div>
+
+						<!-- Footer images -->
+						<div class="col-lg-3">
+							<div
+								class="certificates d-flex flex-row align-items-start justify-content-lg-between justify-content-start flex-lg-nowrap flex-wrap">
+								<div class="cert"><img src="{% static 'images/cert_1.png' %}" alt=""></div>
+								<div class="cert"><img src="{% static 'images/cert_2.png' %}" alt=""></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="copyright">
+				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+				Copyright &copy;
+				<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made
+				with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
+					target="_blank">Colorlib</a>
+				<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+			</div>
+		</footer>
+	</div>
+
+	<script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+	<script src="{% static 'styles/bootstrap-4.1.2/popper.js' %}"></script>
+	<script src="{% static 'styles/bootstrap-4.1.2/bootstrap.min.js' %}"></script>
+	<script src="{% static 'plugins/greensock/TweenMax.min.js' %}"></script>
+	<script src="{% static 'plugins/greensock/TimelineMax.min.js' %}"></script>
+	<script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js' %}"></script>
+	<script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
+	<script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
+	<script src="{% static 'plugins/OwlCarousel2-2.3.4/owl.carousel.js' %}"></script>
+	<script src="{% static 'plugins/easing/easing.js' %}"></script>
+	<script src="{% static 'plugins/progressbar/progressbar.min.js' %}"></script>
+	<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
+	<script src="{% static 'plugins/jquery-datepicker/jquery-ui.js' %}"></script>
+	<script src="{% static 'js/booking.js' %}"></script>
+	<script src="{% static 'js/booking_engine.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/book_form.js' %}"></script>
+	<script src="{% static 'js/whtsap.js' %}"></script>
+</body>
+
+</html>

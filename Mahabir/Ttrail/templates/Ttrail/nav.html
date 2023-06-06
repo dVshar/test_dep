@@ -1,0 +1,74 @@
+{% load static %}
+<header class="header">
+    <div class="header_content d-flex flex-row align-items-center justify-content-start">
+        <div class="logo"><a href="#">{{ Menu.Hotel_name }}</a></div>
+        <div class="ml-auto d-flex flex-row align-items-center justify-content-start">
+            <nav class="main_nav">
+                <ul class="d-flex flex-row align-items-start justify-content-start">
+                    {%if Menu.Home%}
+                    <li><a href="{% url 'landing' %}">Home</a></li>
+                    {%endif%}
+                    {%if Menu.About_Us%}<li><a href="{% url 'About' %}">About us</a></li>{%endif%}
+                    {%if Menu.Rooms%}<li><a href="{% url 'rooms' %}">Rooms</a></li>{%endif%}
+                    {%if Menu.Restaurant%}<li><a href="{% url 'restaurant' %}">Restaurants & Bars</a></li>{%endif%}
+                    <li class="dropdown"><a href="#">More..</a>
+                        <ul class="dropdown_nav">
+                            {%if Menu.Meeting%}<li><a href="{% url 'events' %}"><strong>Meeting & Events</strong></a>
+                            </li>{%endif%}
+                            {%if Menu.Recreation%}<li><a href="{% url 'recreation' %}"><strong>Recreations</strong></a>
+                            </li>{%endif%}
+                            {%if Menu.Facilities%}<li><a href="{% url 'services' %}"><strong>Facilities</strong></a>
+                            </li>{%endif%}
+                            {%if Menu.Nearby_Attraction%}<li><a
+                                    href="{% url 'location' %}"><strong>Locations</strong></a></li>{%endif%}
+                            {%if Menu.Gallery%}<li><a href="{% url 'gallery' %}"><strong>Gallery</strong></a></li>
+                            {%endif%}
+                            {%if Menu.Contact%}<li><a href="{% url 'Contact' %}"><strong>Contact Us</strong></a></li>
+                            {%endif%}
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- <div class="book_button"><a href="{% url 'Booking' %}">Book Online</a></div> -->
+            <div class="header_phone d-flex flex-row align-items-center justify-content-center">
+                <a href="tel:+977 1 5312252"><img src="{% static 'images/phone.png' %}" alt="">
+                    <span>Call Now</span></a>
+            </div>
+
+            <!-- Hamburger Menu -->
+            <div class="hamburger"><i class="fa fa-bars" aria-hidden="true"></i></div>
+        </div>
+    </div>
+</header>
+
+<!-- Menu -->
+
+<div class="menu trans_400 d-flex flex-column">
+    <div class="menu_close"><i class="fa fa-times" aria-hidden="true"></i></div>
+    <div class="menu_content">
+        <nav class="menu_nav text-center">
+            <ul>
+                {%if Menu.Home%}<li><a href="{% url 'landing' %}">Home</a></li>{%endif%}
+                {%if Menu.About_Us%}<li><a href="{% url 'About' %}">About us</a></li>{%endif%}
+                {%if Menu.Rooms%}<li><a href="{% url 'rooms' %}">Rooms</a></li>{%endif%}
+                {%if Menu.Restaurant%}<li><a href="{% url 'restaurant' %}">Restaurants & Bars</a></li>{%endif%}
+                {%if Menu.Meeting%}<li><a href="{% url 'events' %}">Meeting & Events</a></li>{%endif%}
+                {%if Menu.Recreation%}<li><a href="{% url 'restaurant' %}">Recreations</a></li>{%endif%}
+                {%if Menu.Facilities%}<li><a href="{% url 'services' %}">Facilities</a></li>{%endif%}
+                {%if Menu.Nearby_Attraction%}<li><a href="{% url 'location' %}">Locations</a></li>{%endif%}
+                {%if Menu.Gallery%}<li><a href="{% url 'gallery' %}">Gallery</a></li>{%endif%}
+                {%if Menu.Contact%}<li><a href="{% url 'Contact' %}">Contact Us</a></li>{%endif%}
+
+            </ul>
+        </nav>
+    </div>
+    <div class="menu_extra">
+        <!-- <div class="menu_book text-right"><a href="{% url 'Booking' %}">Book online</a></div> -->
+        <div class="menu_phone d-flex flex-row align-items-center justify-content-center">
+            <img src="{% static 'images/phone-2.png' %}" alt="">
+            <span>{{Menu.Number}}</span>
+        </div>
+    </div>
+</div>
+
+<!-- Home -->
